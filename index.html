@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self';">
+    <title>MindZen - Free Mind Mapping Tool</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" integrity="sha384-iw3OoTErCYJJB9mCa8LNS2hbsQ7M3C0EpIsO/H5+EGAkPGc6rk+V8i04oW/K5xq0" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Toolbar -->
+        <div class="toolbar">
+            <div class="toolbar-group">
+                <button class="btn-icon" id="btnMenu" title="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="app-logo">
+                    <i class="fas fa-brain"></i>
+                    <span>MindZen</span>
+                </div>
+                <input type="text" id="mapTitle" class="map-title-input" placeholder="Untitled Mind Map" value="Untitled Mind Map">
+            </div>
+
+            <div class="toolbar-group toolbar-center">
+                <button class="btn-icon" id="btnUndo" title="Undo (Ctrl+Z)">
+                    <i class="fas fa-undo"></i>
+                </button>
+                <button class="btn-icon" id="btnRedo" title="Redo (Ctrl+Y)">
+                    <i class="fas fa-redo"></i>
+                </button>
+                <div class="toolbar-separator"></div>
+                <button class="btn-icon" id="btnPointer" title="Select (V)" data-tool="select" class="active">
+                    <i class="fas fa-mouse-pointer"></i>
+                </button>
+                <button class="btn-icon" id="btnPan" title="Pan (H)" data-tool="pan">
+                    <i class="fas fa-hand"></i>
+                </button>
+                <button class="btn-icon" id="btnText" title="Text (T)" data-tool="text">
+                    <i class="fas fa-font"></i>
+                </button>
+                <button class="btn-icon" id="btnConnect" title="Connect Tool (C) - Drag from node to node to connect" data-tool="connect">
+                    <i class="fas fa-link"></i>
+                </button>
+                <button class="btn-icon" id="btnDisconnect" title="Disconnect Tool (D) - Drag from node to node to disconnect" data-tool="disconnect">
+                    <i class="fas fa-unlink"></i>
+                </button>
+                <div class="toolbar-separator"></div>
+                <button class="btn-icon" id="btnZoomOut" title="Zoom Out">
+                    <i class="fas fa-search-minus"></i>
+                </button>
+                <span class="zoom-indicator">100%</span>
+                <button class="btn-icon" id="btnZoomIn" title="Zoom In">
+                    <i class="fas fa-search-plus"></i>
+                </button>
+                <button class="btn-icon" id="btnFitView" title="Fit to Screen">
+                    <i class="fas fa-compress"></i>
+                </button>
+                <div class="toolbar-separator"></div>
+                <button class="btn-icon" id="btnAutoLayout" title="Auto Layout">
+                    <i class="fas fa-project-diagram"></i>
+                </button>
+                <button class="btn-icon" id="btnToggleGrid" title="Toggle Grid">
+                    <i class="fas fa-th"></i>
+                </button>
+            </div>
+
+            <div class="toolbar-group">
+                <button class="btn-icon" id="btnSearch" title="Search (Ctrl+F)">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="btn-icon" id="btnShare" title="Share">
+                    <i class="fas fa-share-alt"></i>
+                </button>
+                <button class="btn-icon" id="btnImport" title="Import">
+                    <i class="fas fa-upload"></i>
+                </button>
+                <button class="btn-icon" id="btnExport" title="Export">
+                    <i class="fas fa-download"></i>
+                </button>
+                <button class="btn-icon" id="btnShortcuts" title="Keyboard Shortcuts">
+                    <i class="fas fa-keyboard"></i>
+                </button>
+                <button class="btn-icon" id="btnSettings" title="Settings">
+                    <i class="fas fa-cog"></i>
+                </button>
+                <button class="btn-icon" id="btnDarkMode" title="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- Left Sidebar -->
+            <div class="sidebar sidebar-left" id="sidebarLeft">
+                <div class="sidebar-tabs">
+                    <button class="sidebar-tab active" data-panel="nodes">
+                        <i class="fas fa-shapes"></i>
+                        <span>Nodes</span>
+                    </button>
+                    <button class="sidebar-tab" data-panel="structure">
+                        <i class="fas fa-sitemap"></i>
+                        <span>Structure</span>
+                    </button>
+                    <button class="sidebar-tab" data-panel="styles">
+                        <i class="fas fa-palette"></i>
+                        <span>Styles</span>
+                    </button>
+                </div>
+
+                <div class="sidebar-panel active" id="panelNodes">
+                    <div class="panel-header">
+                        <h3>Node Templates</h3>
+                    </div>
+                    <div class="node-templates">
+                        <div class="node-template" data-shape="rectangle">
+                            <div class="node-preview node-rect"></div>
+                            <span>Rectangle</span>
+                        </div>
+                        <div class="node-template" data-shape="rounded">
+                            <div class="node-preview node-rounded"></div>
+                            <span>Rounded</span>
+                        </div>
+                        <div class="node-template" data-shape="circle">
+                            <div class="node-preview node-circle"></div>
+                            <span>Circle</span>
+                        </div>
+                        <div class="node-template" data-shape="diamond">
+                            <div class="node-preview node-diamond"></div>
+                            <span>Diamond</span>
+                        </div>
+                        <div class="node-template" data-shape="hexagon">
+                            <div class="node-preview node-hexagon"></div>
+                            <span>Hexagon</span>
+                        </div>
+                        <div class="node-template" data-shape="cloud">
+                            <div class="node-preview node-cloud"></div>
+                            <span>Cloud</span>
+                        </div>
+                    </div>
+
+                    <div class="panel-section">
+                        <h4>Quick Add</h4>
+                        <button class="btn btn-primary btn-block" id="btnAddNode">
+                            <i class="fas fa-plus"></i> Add Node
+                        </button>
+                        <button class="btn btn-secondary btn-block" id="btnAddChildNode">
+                            <i class="fas fa-level-down-alt"></i> Add Child
+                        </button>
+                        <button class="btn btn-secondary btn-block" id="btnAddSiblingNode">
+                            <i class="fas fa-arrows-alt-h"></i> Add Sibling
+                        </button>
+                    </div>
+                </div>
+
+                <div class="sidebar-panel" id="panelStructure">
+                    <div class="panel-header">
+                        <h3>Map Structure</h3>
+                        <button class="btn-icon-small" id="btnCollapseAll">
+                            <i class="fas fa-compress-alt"></i>
+                        </button>
+                    </div>
+                    <div class="tree-view" id="treeView">
+                        <!-- Tree structure will be dynamically generated -->
+                    </div>
+                </div>
+
+                <div class="sidebar-panel" id="panelStyles">
+                    <div class="panel-header">
+                        <h3>Node Styles</h3>
+                    </div>
+                    <div class="style-controls">
+                        <div class="control-group">
+                            <label>Background Color</label>
+                            <div class="color-palette">
+                                <button class="color-swatch" style="background: #FF6B6B" data-color="#FF6B6B"></button>
+                                <button class="color-swatch" style="background: #4ECDC4" data-color="#4ECDC4"></button>
+                                <button class="color-swatch" style="background: #45B7D1" data-color="#45B7D1"></button>
+                                <button class="color-swatch" style="background: #96CEB4" data-color="#96CEB4"></button>
+                                <button class="color-swatch" style="background: #FFEAA7" data-color="#FFEAA7"></button>
+                                <button class="color-swatch" style="background: #DDA0DD" data-color="#DDA0DD"></button>
+                                <button class="color-swatch" style="background: #98D8C8" data-color="#98D8C8"></button>
+                                <button class="color-swatch" style="background: #FDA7DF" data-color="#FDA7DF"></button>
+                                <input type="color" class="color-picker" id="customColor">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label>Border Style</label>
+                            <select id="borderStyle" class="form-control">
+                                <option value="solid">Solid</option>
+                                <option value="dashed">Dashed</option>
+                                <option value="dotted">Dotted</option>
+                                <option value="none">None</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label>Font Size</label>
+                            <input type="range" id="fontSize" min="12" max="32" value="16" class="slider">
+                            <span id="fontSizeValue">16px</span>
+                        </div>
+                        <div class="control-group">
+                            <label>Font Weight</label>
+                            <select id="fontWeight" class="form-control">
+                                <option value="300">Light</option>
+                                <option value="400">Regular</option>
+                                <option value="500">Medium</option>
+                                <option value="600">Semibold</option>
+                                <option value="700">Bold</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label>Node Icon</label>
+                            <div class="icon-grid">
+                                <button class="icon-btn" data-icon="fa-star"><i class="fas fa-star"></i></button>
+                                <button class="icon-btn" data-icon="fa-heart"><i class="fas fa-heart"></i></button>
+                                <button class="icon-btn" data-icon="fa-flag"><i class="fas fa-flag"></i></button>
+                                <button class="icon-btn" data-icon="fa-bookmark"><i class="fas fa-bookmark"></i></button>
+                                <button class="icon-btn" data-icon="fa-lightbulb"><i class="fas fa-lightbulb"></i></button>
+                                <button class="icon-btn" data-icon="fa-check"><i class="fas fa-check"></i></button>
+                                <button class="icon-btn" data-icon="fa-times"><i class="fas fa-times"></i></button>
+                                <button class="icon-btn" data-icon="fa-exclamation"><i class="fas fa-exclamation"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Canvas Area -->
+            <div class="canvas-container">
+                <canvas id="mainCanvas" tabindex="0" style="outline: none;"></canvas>
+                <canvas id="minimapCanvas" class="minimap"></canvas>
+                
+                <!-- Floating panels -->
+                <div class="search-panel" id="searchPanel" style="display: none;">
+                    <input type="text" id="searchInput" placeholder="Search nodes..." class="search-input">
+                    <button class="btn-icon-small" id="btnCloseSearch">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="stats-panel">
+                    <div class="stat-item">
+                        <i class="fas fa-circle-nodes"></i>
+                        <span id="nodeCount">1</span> nodes
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-link"></i>
+                        <span id="connectionCount">0</span> connections
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="sidebar sidebar-right" id="sidebarRight">
+                <div class="panel-header">
+                    <h3>Properties</h3>
+                    <button class="btn-icon-small" id="btnCloseSidebar">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="properties-panel" id="propertiesPanel">
+                    <div class="empty-state">
+                        <i class="fas fa-mouse-pointer"></i>
+                        <p>Select a node to view properties</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Context Menu -->
+        <div class="context-menu" id="contextMenu">
+            <div class="context-menu-item" data-action="edit">
+                <i class="fas fa-edit"></i>
+                <span>Edit Text</span>
+                <span class="shortcut">F2</span>
+            </div>
+            <div class="context-menu-item" data-action="copy">
+                <i class="fas fa-copy"></i>
+                <span>Copy</span>
+                <span class="shortcut">Ctrl+C</span>
+            </div>
+            <div class="context-menu-item" data-action="paste">
+                <i class="fas fa-paste"></i>
+                <span>Paste</span>
+                <span class="shortcut">Ctrl+V</span>
+            </div>
+            <div class="context-menu-separator"></div>
+            <div class="context-menu-item" data-action="duplicate">
+                <i class="fas fa-clone"></i>
+                <span>Duplicate</span>
+                <span class="shortcut">Ctrl+D</span>
+            </div>
+            <div class="context-menu-item" data-action="delete">
+                <i class="fas fa-trash"></i>
+                <span>Delete</span>
+                <span class="shortcut">Del</span>
+            </div>
+            <div class="context-menu-separator"></div>
+            <div class="context-menu-item" data-action="bring-front">
+                <i class="fas fa-layer-group"></i>
+                <span>Bring to Front</span>
+            </div>
+            <div class="context-menu-item" data-action="send-back">
+                <i class="fas fa-layer-group"></i>
+                <span>Send to Back</span>
+            </div>
+        </div>
+
+        <!-- Command Palette -->
+        <div class="command-palette" id="commandPalette" style="display: none;">
+            <input type="text" id="commandInput" placeholder="Type a command..." class="command-input">
+            <div class="command-list" id="commandList"></div>
+        </div>
+
+        <!-- Export Modal -->
+        <div class="modal" id="exportModal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Export Mind Map</h2>
+                    <button class="btn-icon-small" id="btnCloseExport">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="export-options">
+                        <button class="export-option" data-format="json">
+                            <i class="fas fa-file-code"></i>
+                            <span>JSON</span>
+                            <small>Editable format</small>
+                        </button>
+                        <button class="export-option" data-format="png">
+                            <i class="fas fa-file-image"></i>
+                            <span>PNG Image</span>
+                            <small>High quality</small>
+                        </button>
+                        <button class="export-option" data-format="svg">
+                            <i class="fas fa-file-vector"></i>
+                            <span>SVG Vector</span>
+                            <small>Scalable</small>
+                        </button>
+                        <button class="export-option" data-format="pdf">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>PDF Document</span>
+                            <small>Printable</small>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shortcuts Modal -->
+        <div class="modal" id="shortcutsModal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Keyboard Shortcuts</h2>
+                    <button class="btn-icon-small" id="btnCloseShortcuts">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="shortcuts-grid">
+                        <div class="shortcuts-section">
+                            <h3>General</h3>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">Ctrl+K</span>
+                                <span class="shortcut-desc">Command Palette</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">Ctrl+F</span>
+                                <span class="shortcut-desc">Search Nodes</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">Esc</span>
+                                <span class="shortcut-desc">Clear Selection</span>
+                            </div>
+                        </div>
+
+                        <div class="shortcuts-section">
+                            <h3>History</h3>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">Ctrl+Z</span>
+                                <span class="shortcut-desc">Undo</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">Ctrl+Y</span>
+                                <span class="shortcut-desc">Redo</span>
+                            </div>
+                        </div>
+
+                        <div class="shortcuts-section">
+                            <h3>Selection</h3>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">Ctrl+A</span>
+                                <span class="shortcut-desc">Select All</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">Ctrl+C</span>
+                                <span class="shortcut-desc">Copy</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">Ctrl+V</span>
+                                <span class="shortcut-desc">Paste</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">Ctrl+X</span>
+                                <span class="shortcut-desc">Cut</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">Ctrl+D</span>
+                                <span class="shortcut-desc">Duplicate</span>
+                            </div>
+                        </div>
+
+                        <div class="shortcuts-section">
+                            <h3>Nodes</h3>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">F2</span>
+                                <span class="shortcut-desc">Edit Text</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">Del</span>
+                                <span class="shortcut-desc">Delete Node</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">N</span>
+                                <span class="shortcut-desc">Add Node</span>
+                            </div>
+                        </div>
+
+                        <div class="shortcuts-section">
+                            <h3>View</h3>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">Ctrl++</span>
+                                <span class="shortcut-desc">Zoom In</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">Ctrl+-</span>
+                                <span class="shortcut-desc">Zoom Out</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">Ctrl+0</span>
+                                <span class="shortcut-desc">Fit to Screen</span>
+                            </div>
+                        </div>
+
+                        <div class="shortcuts-section">
+                            <h3>Layout</h3>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">Ctrl+L</span>
+                                <span class="shortcut-desc">Auto Layout</span>
+                            </div>
+                        </div>
+
+                        <div class="shortcuts-section">
+                            <h3>File</h3>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">Ctrl+I</span>
+                                <span class="shortcut-desc">Import JSON</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">Ctrl+E</span>
+                                <span class="shortcut-desc">Export</span>
+                            </div>
+                        </div>
+
+                        <div class="shortcuts-section">
+                            <h3>Tools</h3>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">V</span>
+                                <span class="shortcut-desc">Select Tool</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">H</span>
+                                <span class="shortcut-desc">Pan Tool</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">T</span>
+                                <span class="shortcut-desc">Text Tool</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">C</span>
+                                <span class="shortcut-desc">Connect Tool</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-key">D</span>
+                                <span class="shortcut-desc">Disconnect Tool</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rich Text Editor -->
+        <div class="text-editor" id="textEditor" style="display: none;">
+            <div class="editor-toolbar">
+                <button class="editor-btn" data-command="bold" title="Bold">
+                    <i class="fas fa-bold"></i>
+                </button>
+                <button class="editor-btn" data-command="italic" title="Italic">
+                    <i class="fas fa-italic"></i>
+                </button>
+                <button class="editor-btn" data-command="underline" title="Underline">
+                    <i class="fas fa-underline"></i>
+                </button>
+                <div class="toolbar-separator"></div>
+                <button class="editor-btn" data-command="link" title="Link">
+                    <i class="fas fa-link"></i>
+                </button>
+                <button class="editor-btn" data-command="emoji" title="Emoji">
+                    <i class="fas fa-smile"></i>
+                </button>
+            </div>
+            <div class="editor-content" contenteditable="true" id="editorContent"></div>
+            <div class="editor-footer">
+                <button class="btn btn-primary btn-small" id="btnSaveText">Save</button>
+                <button class="btn btn-secondary btn-small" id="btnCancelText">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden file input for JSON import -->
+    <input type="file" id="jsonFileInput" accept=".json" style="display: none;">
+
+    <script src="app.js"></script>
+</body>
+</html>
