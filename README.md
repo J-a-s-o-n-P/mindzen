@@ -3,7 +3,6 @@
 ![MindZen Logo](https://img.shields.io/badge/MindZen-Mind%20Mapping-6366f1?style=for-the-badge&logo=brain&logoColor=white)
 ![Version](https://img.shields.io/badge/Version-1.0-green?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
-![Security](https://img.shields.io/badge/Security-Enhanced-success?style=flat-square)
 
 ## Overview
 
@@ -12,7 +11,7 @@ MindZen is a free web-based mind mapping tool that helps you organize your thoug
 ## Features
 
 ### Core Functionality
-- **Visual Mind Mapping**: Create beautiful, organized mind maps with an intuitive drag-and-drop interface
+- **Visual Mind Mapping**: Create organized mind maps with a drag-and-drop interface
 - **Custom Titles**: Name your mind maps for easy identification and organization
 - **Rich Node Customization**: 
   - Multiple node shapes (rectangle, rounded, circle, diamond, hexagon, cloud)
@@ -163,7 +162,6 @@ MindZen is released under the MIT License. Feel free to use, modify, and distrib
 
 ### v1.0 (Current)
 - Initial release with core mind mapping features
-- Enhanced security implementation
 - Title support for mind maps
 - Dark mode support
 - Comprehensive keyboard shortcuts
