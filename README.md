@@ -1,8 +1,26 @@
-# MindZen - Free Mind Mapping Tool
+# MindZen - Free Mind Mapping Tool by Jason Pearce
 
-![MindZen Logo](https://img.shields.io/badge/MindZen-Mind%20Mapping-6366f1?style=for-the-badge&logo=brain&logoColor=white)
-![Version](https://img.shields.io/badge/Version-1.0-green?style=flat-square)
-![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
+[![MindZen Logo](https://img.shields.io/badge/MindZen-Mind%20Mapping-6366f1?style=for-the-badge&logo=brain&logoColor=white)](https://j-a-s-o-n-p.github.io/mindzen)
+[![Version](https://img.shields.io/badge/Version-1.0-green?style=flat-square)](https://github.com/j-a-s-o-n-p/mindzen)
+[![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
+
+---
+
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Keyboard Shortcuts](#keyboard-shortcuts)
+- [Browser Compatibility](#browser-compatibility)
+- [Privacy & Data](#privacy--data)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [License](#license)
+- [Credits](#credits)
+- [Version History](#version-history)
+- [Contact](#contact)
+
+---
 
 ## Overview
 
@@ -43,12 +61,15 @@ MindZen is a free web-based mind mapping tool that helps you organize your thoug
 - **Undo/Redo**: Full history management (Ctrl+Z/Ctrl+Y)
 - **Auto Layout**: Automatically arrange nodes for optimal viewing
 
-
+---
 
 ## Getting Started
 
-### Quick Start
+👉 **Use online here:** [MindZen Live](https://j-a-s-o-n-p.github.io/mindzen)
 
+Or install locally:
+
+### Quick Start
 1. Open `index.html` in a modern web browser
 2. Start with the central "Main Topic" node
 3. Right-click to add child nodes or use the toolbar buttons
@@ -57,16 +78,14 @@ MindZen is a free web-based mind mapping tool that helps you organize your thoug
 6. Save your work using Export → JSON
 
 ### Installation
-
 No installation required! Simply:
-
 1. Clone or download this repository
 2. Open `index.html` in your web browser
 3. Start mapping!
 
 For the best experience, use a modern browser like Chrome, Firefox, Safari, or Edge.
 
-
+---
 
 ## Keyboard Shortcuts
 
@@ -106,21 +125,24 @@ For the best experience, use a modern browser like Chrome, Firefox, Safari, or E
 - `Ctrl+L` - Auto layout
 - `Ctrl+A` - Select all
 
+---
 
 ## Browser Compatibility
-
 MindZen works best on:
 - Chrome 90+
 - Firefox 88+
 - Safari 14+
 - Edge 90+
 
-## Privacy & Data
+---
 
+## Privacy & Data
 - **100% Local**: All data stays in your browser
 - **No Tracking**: No analytics or tracking scripts
 - **No Server**: No backend server or database
 - **Your Data, Your Control**: Export and delete at any time
+
+---
 
 ## Troubleshooting
 
@@ -139,8 +161,9 @@ MindZen works best on:
 - Close other browser tabs
 - Try disabling browser extensions
 
-## Contributing
+---
 
+## Contributing
 Contributions are welcome! Please:
 1. Fork the repository
 2. Create a feature branch
@@ -148,15 +171,19 @@ Contributions are welcome! Please:
 4. Ensure security best practices
 5. Submit a pull request
 
-## License
+---
 
-MindZen is released under the MIT License. Feel free to use, modify, and distribute as needed.
+## License
+MindZen is released under the [MIT License](LICENSE). Feel free to use, modify, and distribute as needed.
+
+---
 
 ## Credits
-
 - Built with vanilla JavaScript, HTML5 Canvas, and CSS3
 - Icons by Font Awesome
 - Font: Inter by Google Fonts
+
+---
 
 ## Version History
 
@@ -167,10 +194,8 @@ MindZen is released under the MIT License. Feel free to use, modify, and distrib
 - Comprehensive keyboard shortcuts
 - Import/Export functionality
 
-## Contact
-
-For questions, suggestions, or bug reports, please open an issue on the GitHub repository.
-
 ---
 
-**MindZen** - Organize your thoughts, visualize your ideas, achieve mental clarity. 🧘‍♀️✨
+## Contact
+For questions, suggestions, or bug reports, please open an issue on the [GitHub repository](https://github.com/j-a-s-o-n-p/mindzen).
+
