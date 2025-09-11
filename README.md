@@ -1,4 +1,5 @@
-## MindZen - Free Mind Mapping Tool by Jason Pearce
+## MindZen
+Free Mind Mapping Tool by Jason Pearce
 
 [![MindZen Logo](https://img.shields.io/badge/MindZen-Mind%20Mapping-6366f1?style=for-the-badge&logo=brain&logoColor=white)](https://j-a-s-o-n-p.github.io/mindzen)
 [![Version](https://img.shields.io/badge/Version-1.0-green?style=flat-square)](https://github.com/j-a-s-o-n-p/mindzen)
