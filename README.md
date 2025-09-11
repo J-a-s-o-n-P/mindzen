@@ -68,7 +68,7 @@ MindZen is a free web-based mind mapping tool that helps you organize your thoug
 
 👉 **Use online here:** [MindZen Live](https://j-a-s-o-n-p.github.io/mindzen)
 
-Or install locally:
+Or run locally
 
 ### Quick Start
 1. Open `index.html` in a modern web browser
